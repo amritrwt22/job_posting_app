@@ -18,7 +18,8 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-//schema for Account table
+
+//schema for Account table 
 model Account {
   id                String  @id @default(cuid())
   userId            String
@@ -34,11 +35,12 @@ model Account {
   session_state     String?
 
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  //unique combination of provider and providerAccountId in all records
 
   // this is relation to the User model, which means that an account belongs to a user
   //userid is the foreign key in this table which refers to the id field in the User model
   //onDelete: Cascade means if user is deleted, all accounts of that user will also be deleted
-  @@unique([provider, providerAccountId])
+  @@unique([provider, providerAccountId]) //example :google is provider , amrit@gmail.com is providerAccountId
 }
 
 //this table contain all diff users and their sessions -(tokens & expiry)
@@ -102,3 +104,4 @@ model Application {
 
   @@unique([jobId, userId]) //this means that a user can apply for a job only once, if they try to apply again, it will throw an error
 }
+
