@@ -6,7 +6,7 @@
 
 generator client {
   provider = "prisma-client-js"
-  output   = "../app/generated/prisma" 
+  output   = "../app/generated/prisma"
   //this is location of ur prisma client , if u will make prisma.ts file at this
   //location which will the prisma client then only use this path. 
   //otherwise by default it generates inside lib/prisma.ts 
@@ -32,8 +32,9 @@ model Account {
   scope             String?
   id_token          String? @db.Text
   session_state     String?
-  
+
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
   // this is relation to the User model, which means that an account belongs to a user
   //userid is the foreign key in this table which refers to the id field in the User model
   //onDelete: Cascade means if user is deleted, all accounts of that user will also be deleted
@@ -46,7 +47,7 @@ model Session {
   sessionToken String   @unique
   userId       String
   expires      DateTime
-  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
 
 //for authentication purposes- includes verific token and expiry
@@ -60,42 +61,44 @@ model VerificationToken {
 
 //user table
 model User {
-  id String @id @default(cuid()) //cuid generates random unique id
-  name String?
-  email String? @unique
+  id            String        @id @default(cuid()) //cuid generates random unique id
+  name          String?
+  email         String?       @unique
   emailVerified DateTime?
-  image String?
-  accounts Account[] //Account[] is a relation to the Account model, which means that a user can have multiple accounts
-  sessions Session[] //Session[] is a relation to the Session model, which means that a user can have multiple sessions
-  jobs Job[] @relation("PostedJobs")  //Job[] is a relation to the Job model, which means that a user can have multiple jobs
+  image         String?
+  accounts      Account[] //Account[] is a relation to the Account model, which means that a user can have multiple accounts
+  sessions      Session[] //Session[] is a relation to the Session model, which means that a user can have multiple sessions
+  jobs          Job[]         @relation("PostedJobs") //Job[] is a relation to the Job model, which means that a user can have multiple jobs
   //@PostedJobs is a relation name, it is used to identify the relation between User and Job models
-  applications Application[] // Application[] is a relation to the Application model, which means that a user can have multiple applications
+  applications  Application[] // Application[] is a relation to the Application model, which means that a user can have multiple applications
 }
 
 //when we create a user, we authenticate the user and a account, session, verification token is created for that user. 
 
-model Job{
-  id String @id @default(cuid())
-  title String
-  company String
-  location String
-  type String
-  description String @db.Text // @db.Text is used to store large text data
-  salary String?
+model Job {
+  id          String  @id @default(cuid())
+  title       String
+  company     String
+  location    String
+  type        String
+  description String  @db.Text // @db.Text is used to store large text data
+  salary      String?
 
-  postedAt DateTime @default(now()) 
-  postedBy User @relation("PostedJobs", fields: [postedById], references: [id]) //User is a relation to the User model, which means that a job is posted by a user
-  postedById String // this is the foreign key in this table which refers to the id field in the User model
+  postedAt     DateTime      @default(now())
+  postedBy     User          @relation("PostedJobs", fields: [postedById], references: [id]) //User is a relation to the User model, which means that a job is posted by a user
+  postedById   String // this is the foreign key in this table which refers to the id field in the User model
   applications Application[] // Application[] is a relation to the Application model, which means that a job can have multiple applications
 }
 
-model Application{
-  id String @id @default(cuid())
-  jobId String // this is the foreign key in this table which refers to the id field in the Job model
-  userId String // this is the foreign key in this table which refers to the id field in the User model
+model Application {
+  id        String   @id @default(cuid())
+  jobId     String // this is the foreign key in this table which refers to the id field in the Job model
+  userId    String // this is the foreign key in this table which refers to the id field in the User model
   //this model connects User and Job models, it means that a user can apply for a job
-  status String @default("pending") //default status is pending, it can be changed to accepted or rejected later
+  status    String   @default("pending") //default status is pending, it can be changed to accepted or rejected later
   appliedAt DateTime @default(now()) //this is the date and time when the application was created
-  job Job @relation(fields: [jobId], references: [id], onDelete: Cascade) //Job is a relation to the Job model, which means that an application belongs to a job
-  user User @relation(fields: [userId], references: [id], onDelete: Cascade) //User is a relation to the User model, which means that an application belongs to a user
+  job       Job      @relation(fields: [jobId], references: [id], onDelete: Cascade) //Job is a relation to the Job model, which means that an application belongs to a job
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade) //User is a relation to the User model, which means that an application belongs to a user
+
+  @@unique([jobId, userId]) //this means that a user can apply for a job only once, if they try to apply again, it will throw an error
 }
