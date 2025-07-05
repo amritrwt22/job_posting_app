@@ -2,11 +2,16 @@
 
 import Link from "next/link";
 import Image from "next/image";
+// This hook is used to access the session data in a Next.js application
 import { useSession } from "next-auth/react";
-// import { logout } from "@/lib/auth";
+// This function is used to log out the user from the application
+import { logout } from "@/lib/auth"; 
 
 export default function Navbar() {
-//   const { data: session } = useSession();
+//useSession is a hook from NextAuth that provides session data, including user authentication status
+//data: session contains the current user's session information, such as whether they are logged in or not.
+//data of useSession is named session
+  const { data: session } = useSession();
   return (
     <nav className="bg-white shadow-sm">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -34,7 +39,10 @@ export default function Navbar() {
               Browse Jobs
             </Link>
 
-            <Link
+            {/* If the user is logged in, show the "Post a Job" and "Dashboard" links */}
+            {session ? (
+              <>
+                <Link
                   href="/jobs/post"
                   className="text-gray-600 hover:text-gray-900 px-3 py-2 rounded-md text-sm font-medium"
                 >
@@ -46,24 +54,29 @@ export default function Navbar() {
                 >
                   Dashboard
                 </Link>
-                <Link
+                <button
+                  onClick={logout}
+                  className="text-gray-600 hover:text-gray-900 px-3 py-2 rounded-md text-sm font-medium"
+                >
+                  Sign Out
+                </button>
+              </>
+            ) : (
+              <Link
                 href="/auth/signin"
                 className="text-gray-600 hover:text-gray-900 px-3 py-2 rounded-md text-sm font-medium"
               >
                 Sign In
               </Link>
-              <button
-                //   onClick={logout}
-                  className="text-gray-600 hover:text-gray-900 px-3 py-2 rounded-md text-sm font-medium"
-                >
-                  Sign Out
-                </button>
+            )}
           </div>
         </div>
       </div>
     </nav>
   );
 }
-//navbar is built , session management is not implemented yet 
-//after session management is implemented, the navbar will show different links based on the user's authentication status
-//post a job, dashboard, and sign out will only be visible to authenticated users
+/*
+This is a Next.js component for the navigation bar of a job board application. It includes:
+session management is handled using NextAuth, allowing users to sign in or out.
+after signing in, user can access job posting, Dashboard, and sign out functionalities.
+*/
