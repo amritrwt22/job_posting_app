@@ -40,117 +40,120 @@ export default function PostJobPage() {
   //form fields are created to collect job details such as title, company, location, type, description, and salary
   return (
     <div className="max-w-2xl mx-auto">
-      <h1 className="text-2xl font-bold text-gray-900 mb-6">Post a Job</h1>
-      <form className="space-y-6" onSubmit={handleSubmit}>
-        <div>
-          <label
-            htmlFor="title"
-            className="block text-sm font-medium text-gray-700"
-          >
-            Job Title
-          </label>
-          <input
-            type="text"
-            name="title"
-            id="title"
-            required
-            className="mt-1 block w-full border border-gray-300 rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500 text-gray-900"
-          />
-        </div>
-
-        <div>
-          <label
-            htmlFor="company"
-            className="block text-sm font-medium text-gray-700"
-          >
-            Company
-          </label>
-          <input
-            type="text"
-            name="company"
-            id="company"
-            required
-            className="mt-1 block w-full border border-gray-300 rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500 text-gray-900"
-          />
-        </div>
-
-        <div>
-          <label
-            htmlFor="location"
-            className="block text-sm font-medium text-gray-700"
-          >
-            Location
-          </label>
-          <input
-            type="text"
-            name="location"
-            id="location"
-            required
-            className="mt-1 block w-full border border-gray-300 rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500 text-gray-900"
-          />
-        </div>
-
-        <div>
-          <label
-            htmlFor="type"
-            className="block text-sm font-medium text-gray-700"
-          >
-            Job Type
-          </label>
-          <select
-            name="type"
-            id="type"
-            required
-            className="mt-1 block w-full border border-gray-300 rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500 text-gray-900"
-          >
-            <option value="">Select a type</option>
-            <option value="Full-time">Full-time</option>
-            <option value="Part-time">Part-time</option>
-            <option value="Contract">Contract</option>
-            <option value="Internship">Internship</option>
-          </select>
-        </div>
-
-        <div>
-          <label
-            htmlFor="description"
-            className="block text-sm font-medium text-gray-700"
-          >
-            Description
-          </label>
-          <textarea
-            name="description"
-            id="description"
-            rows={6}
-            required
-            className="mt-1 block w-full border border-gray-300 rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500 text-gray-900"
-          />
-        </div>
-
-        <div>
-          <label
-            htmlFor="salary"
-            className="block text-sm font-medium text-gray-700"
-          >
-            Salary (optional)
-          </label>
-          <input
-            type="text"
-            name="salary"
-            id="salary"
-            placeholder="e.g., $80,000 - $100,000"
-            className="mt-1 block w-full border border-gray-300 rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500 text-gray-900"
-          />
-        </div>
-
-        <button
-          type="submit"
-          className="w-full bg-indigo-600 text-white px-4 py-2 rounded-md hover:bg-indigo-700 disabled:opacity-50 disabled:cursor-not-allowed"
-        >
-          Post Job
-        </button>
-      </form>
+  <h1 className="text-3xl font-extrabold text-blue-700 mb-8 text-center tracking-tight">
+    Post a Job
+  </h1>
+  <form className="space-y-7" onSubmit={handleSubmit}>
+    <div>
+      <label
+        htmlFor="title"
+        className="block text-base font-semibold text-blue-800"
+      >
+        Job Title
+      </label>
+      <input
+        type="text"
+        name="title"
+        id="title"
+        required
+        className="mt-2 block w-full border border-blue-200 rounded-lg px-5 py-3 focus:outline-none focus:ring-2 focus:ring-blue-400 text-gray-900 font-medium bg-blue-50/50 transition"
+      />
     </div>
+
+    <div>
+      <label
+        htmlFor="company"
+        className="block text-base font-semibold text-blue-800"
+      >
+        Company
+      </label>
+      <input
+        type="text"
+        name="company"
+        id="company"
+        required
+        className="mt-2 block w-full border border-blue-200 rounded-lg px-5 py-3 focus:outline-none focus:ring-2 focus:ring-blue-400 text-gray-900 font-medium bg-blue-50/50 transition"
+      />
+    </div>
+
+    <div>
+      <label
+        htmlFor="location"
+        className="block text-base font-semibold text-blue-800"
+      >
+        Location
+      </label>
+      <input
+        type="text"
+        name="location"
+        id="location"
+        required
+        className="mt-2 block w-full border border-blue-200 rounded-lg px-5 py-3 focus:outline-none focus:ring-2 focus:ring-blue-400 text-gray-900 font-medium bg-blue-50/50 transition"
+      />
+    </div>
+
+    <div>
+      <label
+        htmlFor="type"
+        className="block text-base font-semibold text-blue-800"
+      >
+        Job Type
+      </label>
+      <select
+        name="type"
+        id="type"
+        required
+        className="mt-2 block w-full border border-blue-200 rounded-lg px-5 py-3 focus:outline-none focus:ring-2 focus:ring-blue-400 text-gray-900 font-medium bg-blue-50/50 transition"
+      >
+        <option value="">Select a type</option>
+        <option value="Full-time">Full-time</option>
+        <option value="Part-time">Part-time</option>
+        <option value="Contract">Contract</option>
+        <option value="Internship">Internship</option>
+      </select>
+    </div>
+
+    <div>
+      <label
+        htmlFor="description"
+        className="block text-base font-semibold text-blue-800"
+      >
+        Description
+      </label>
+      <textarea
+        name="description"
+        id="description"
+        rows={6}
+        required
+        className="mt-2 block w-full border border-blue-200 rounded-lg px-5 py-3 focus:outline-none focus:ring-2 focus:ring-blue-400 text-gray-900 font-medium bg-blue-50/50 transition"
+      />
+    </div>
+
+    <div>
+      <label
+        htmlFor="salary"
+        className="block text-base font-semibold text-blue-800"
+      >
+        Salary <span className="text-gray-400 font-normal">(optional)</span>
+      </label>
+      <input
+        type="text"
+        name="salary"
+        id="salary"
+        placeholder="e.g., $80,000 - $100,000"
+        className="mt-2 block w-full border border-blue-200 rounded-lg px-5 py-3 focus:outline-none focus:ring-2 focus:ring-blue-400 text-gray-900 font-medium bg-blue-50/50 transition"
+      />
+    </div>
+
+    <button
+      type="submit"
+      className="w-full bg-gradient-to-r from-blue-600 to-yellow-400 text-white px-6 py-3 rounded-lg font-semibold text-lg shadow hover:from-blue-700 hover:to-yellow-500 transition"
+    >
+      Post Job
+    </button>
+  </form>
+</div>
+
   );
 }
 
