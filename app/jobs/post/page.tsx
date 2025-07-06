@@ -1,12 +1,18 @@
 "use client";
-
+// This page allows users to post a job listing
 import { FormEvent } from "react";
+//FormEvent is used to handle form submission events in React
 
 export default function PostJobPage() {
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
+    e.preventDefault(); // this stops the page from reloading when the form is submitted
 
     const formData = new FormData(e.currentTarget);
+    // FormData is a built-in JavaScript object that allows you to easily construct a set of key/value pairs representing form fields and their values. 
+    // It is commonly used to send form data in HTTP requests, especially when dealing with file uploads or complex data structures.
+    //e.currentTarget refers to the form element that triggered the submit event, allowing you to access its data.
+
+    //data object is created to hold the job listing details
     const data = {
       title: formData.get("title"),
       company: formData.get("company"),
@@ -15,20 +21,23 @@ export default function PostJobPage() {
       description: formData.get("description"),
       salary: formData.get("salary"),
     };
-
+    
+    // The data object is then sent to the server via a POST request to the "/api/jobs" endpoint
+    //fetch is a built-in JavaScript function that allows you to make network requests, such as sending data to a server or retrieving data from an API.
     try {
       await fetch("/api/jobs", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(data),
+        body: JSON.stringify(data), // converts the data object to a JSON string for transmission
       });
-      window.location.href = "/jobs";
+      window.location.href = "/jobs";  // Redirects the user to the jobs page after successful submission
     } catch (err) {
       console.log(err);
     }
   };
+  //form fields are created to collect job details such as title, company, location, type, description, and salary
   return (
     <div className="max-w-2xl mx-auto">
       <h1 className="text-2xl font-bold text-gray-900 mb-6">Post a Job</h1>
@@ -146,7 +155,7 @@ export default function PostJobPage() {
 }
 
 /* explain this page 
-
-
-
+This is a Next.js page component that allows users to post job listings. It includes a form 
+with fields for job title, company, location, job type, description, and an optional salary 
+field. 
 */
