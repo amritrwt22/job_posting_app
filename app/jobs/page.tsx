@@ -40,14 +40,37 @@ export default async function JobsPage({
     //there is relation between job and user, in job model, postedBy is a relation field that connects to the User model
     //so every job has a postedBy field that contains the user who posted the job
   });
-
+  
+  const heroImage =
+  "https://images.unsplash.com/photo-1521737852567-6949f3f9f2b5?auto=format&fit=crop&w=1200&q=80";
   return (
+    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    {/* Hero Section */}
+    <div
+        className="relative rounded-3xl overflow-hidden mb-12 shadow-lg "
+        style={{ minHeight: "220px" }}
+      >
+        <img
+          src={heroImage}
+          alt="Dashboard background"
+          className="absolute inset-0 w-full h-full object-cover opacity-60"
+        />
+        <div className="relative z-10 flex flex-col items-center justify-center h-full py-12">
+          <h1 className="text-5xl font-extrabold text-blue-800 drop-shadow-lg tracking-tight">
+            <span className="inline-flex items-center gap-3">
+              <svg className="w-10 h-10 text-yellow-400" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24"><path d="M12 6V3m0 0C7.03 3 3 7.03 3 12c0 4.97 4.03 9 9 9s9-4.03 9-9c0-4.97-4.03-9-9-9zm0 0v3m0 0l2 2m-2-2l-2 2" /></svg>
+              Find Your Next Opportunity
+            </span>
+          </h1>
+          <p className="mt-4 text-lg text-blue-900 font-medium">
+          Explore a wide range of exciting job opportunities from top companies. Use the search and filters below to find your next career move.
+          </p>
+        </div>
+      </div>
+
     <div className="space-y-8">
       <div className="bg-gradient-to-r from-blue-50 to-yellow-50 p-1 rounded-xl shadow-md">
         <div className="bg-white rounded-xl p-8 shadow-sm">
-          <h1 className="text-3xl font-extrabold text-blue-700 mb-8 text-center tracking-tight">
-            Find Your Next Opportunity
-          </h1>
           <form className="flex flex-col md:flex-row items-center gap-4">
             <div className="flex-1 w-full">
               <input
@@ -164,6 +187,7 @@ export default async function JobsPage({
           </div>
         ))}
       </div>
+    </div>
     </div>
   );
 }
