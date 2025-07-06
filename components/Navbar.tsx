@@ -4,13 +4,16 @@ import Link from "next/link";
 import Image from "next/image";
 // This hook is used to access the session data in a Next.js application
 import { useSession } from "next-auth/react";
-// This function is used to log out the user from the application
-import { logout } from "@/lib/auth"; 
+// This function is used to log out the user from the application - but wont update session state immediately
+import { logout } from "@/lib/auth";
+// This function is used to sign out the user from NextAuth - now when u signout
+// the session state will be updated immediately, and the navbar will re-render correctly.
+import { signOut } from "next-auth/react";
 
 export default function Navbar() {
-//useSession is a hook from NextAuth that provides session data, including user authentication status
-//data: session contains the current user's session information, such as whether they are logged in or not.
-//data of useSession is named session
+  //useSession is a hook from NextAuth that provides session data, including user authentication status
+  //data: session contains the current user's session information, such as whether they are logged in or not.
+  //data of useSession is named session
   const { data: session } = useSession();
   return (
     <nav className="bg-white shadow-sm">
@@ -55,7 +58,9 @@ export default function Navbar() {
                   Dashboard
                 </Link>
                 <button
-                  onClick={logout}
+                  // onClick={logout} // This function is used to log out the user from the application
+                  onClick={() => signOut({ callbackUrl: "/auth/signin" })} // This function is used to sign out the user from NextAuth
+                  // updates session state immediately
                   className="text-gray-600 hover:text-gray-900 px-3 py-2 rounded-md text-sm font-medium"
                 >
                   Sign Out
